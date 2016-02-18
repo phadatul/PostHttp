@@ -26,13 +26,15 @@ import javax.net.ssl.HttpsURLConnection;
 public class MainActivity extends AppCompatActivity {
 
     Button b;
-    EditText et;
+    EditText txtID,txtName,txtSal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         b=(Button)findViewById(R.id.button);
-        et=(EditText)findViewById(R.id.textView);
+        txtID=(EditText)findViewById(R.id.textView);
+        txtName=(EditText)findViewById(R.id.textView2);
+        txtSal=(EditText)findViewById(R.id.textView3);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,6 +46,15 @@ public class MainActivity extends AppCompatActivity {
 
 
     public class MyTask extends AsyncTask<String,String,String>{
+        String id,name,sal;
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            id=txtID.getText().toString();
+            name=txtName.getText().toString();
+            sal=txtSal.getText().toString();
+        }
 
         @Override
         protected String doInBackground(String... params) {
@@ -59,12 +70,12 @@ public class MainActivity extends AppCompatActivity {
 
 // write out form parameters
 
-               /*
-                String postParamaters = "param1=value1&param2=value2";
-                urlConnection.setFixedLengthStreamingMode(postParameters.getBytes().length);
+                String postParamaters = "id="+id+"&name="+name+"&salary="+sal;
+
+                urlConnection.setFixedLengthStreamingMode(postParamaters.getBytes().length);
                 PrintWriter out = new PrintWriter(urlConnection.getOutputStream());
-                out.print(postParameters);
-                out.close();*/
+                out.print(postParamaters);
+                out.close();
 
 // connect
                 urlConnection.connect();
@@ -92,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(String s) {
             super.onPostExecute(s);
-            et.setText(s);
+            txtID.setText(s);
         }
     }
 }
