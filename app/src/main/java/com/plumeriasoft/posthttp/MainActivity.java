@@ -25,17 +25,17 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button b;
+    Button btn;
     EditText txtID,txtName,txtSal;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        b=(Button)findViewById(R.id.button);
+        btn=(Button)findViewById(R.id.button);
         txtID=(EditText)findViewById(R.id.textView);
         txtName=(EditText)findViewById(R.id.textView2);
         txtSal=(EditText)findViewById(R.id.textView3);
-        b.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new MyTask().execute("url");
